@@ -4,8 +4,7 @@ A web tool site
 
 ## Features
 
-[ ] image format converter
-
+-   [ ] image format converter
 -   [ ] raditional Chinese to Simplified Chinese
 
 ## Getting Started

@@ -20,7 +20,10 @@ export function MainComponent() {
             {/* left */}
             <div
                 style={{
+                    // mixBlendMode: "multiply",
                     writingMode: "vertical-lr",
+                    // 对比度反转
+                    // filter: "invert(100%)",
                 }}
                 className="hidden h-screen  overflow-hidden text-[248px] font-black italic leading-none tracking-[-0.08em] text-[#010101] md:flex"
             >
@@ -157,7 +160,7 @@ export function VideoBGComponent() {
     return (
         <div className="absolute left-0 top-0 -z-50  h-screen w-screen">
             <video {...VideoProps} ref={ref} poster="/fv.webp" loop>
-                <source src="/fv_movie2.mp4" type="video/mp4" />
+                <source src="/fv_movie2.webm" type="video/webm" />
             </video>
             <video
                 {...VideoProps}
@@ -168,7 +171,7 @@ export function VideoBGComponent() {
                     ref.current?.play();
                 }}
             >
-                <source src="/fv_movie1.mp4" type="video/mp4" />
+                <source src="/fv_movie1.webm" type="video/webm" />
             </video>
             <Image
                 style={{
