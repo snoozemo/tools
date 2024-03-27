@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { useRouter } from "next/navigation";
 import { NAV_BUTTON_LIST } from "./const";
@@ -14,7 +14,9 @@ export function MainComponent() {
             NAV_BUTTON_LIST[activedKey].description,
         ];
     }, [activedKey]);
-
+    useEffect(() => {
+        router.prefetch("/images");
+    }, [router]);
     return (
         <main className="relative flex h-screen w-screen flex-col md:flex-row">
             {/* left */}
@@ -164,6 +166,10 @@ export function VideoBGComponent() {
             </video>
             <video
                 {...VideoProps}
+                // 视频加载完毕
+                onCanPlay={(e) => {
+                    e.currentTarget.currentTime = 1;
+                }}
                 autoPlay
                 onEnded={(e) => {
                     // 播放完毕隐藏
