@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { useRouter } from "next/navigation";
 import { NAV_BUTTON_LIST } from "./const";
@@ -14,13 +14,18 @@ export function MainComponent() {
             NAV_BUTTON_LIST[activedKey].description,
         ];
     }, [activedKey]);
-
+    useEffect(() => {
+        router.prefetch("/images");
+    }, [router]);
     return (
         <main className="relative flex h-screen w-screen flex-col md:flex-row">
             {/* left */}
             <div
                 style={{
+                    // mixBlendMode: "multiply",
                     writingMode: "vertical-lr",
+                    // 对比度反转
+                    // filter: "invert(100%)",
                 }}
                 className="hidden h-screen  overflow-hidden text-[248px] font-black italic leading-none tracking-[-0.08em] text-[#010101] md:flex"
             >
@@ -157,10 +162,14 @@ export function VideoBGComponent() {
     return (
         <div className="absolute left-0 top-0 -z-50  h-screen w-screen">
             <video {...VideoProps} ref={ref} poster="/fv.webp" loop>
-                <source src="/fv_movie2.mp4" type="video/mp4" />
+                <source src="/fv_movie2.webm" type="video/webm" />
             </video>
             <video
                 {...VideoProps}
+                // 视频加载完毕
+                onCanPlay={(e) => {
+                    e.currentTarget.currentTime = 1;
+                }}
                 autoPlay
                 onEnded={(e) => {
                     // 播放完毕隐藏
@@ -168,7 +177,7 @@ export function VideoBGComponent() {
                     ref.current?.play();
                 }}
             >
-                <source src="/fv_movie1.mp4" type="video/mp4" />
+                <source src="/fv_movie1.webm" type="video/webm" />
             </video>
             <Image
                 style={{
