@@ -160,16 +160,14 @@ export function VideoBGComponent() {
         muted: true,
     };
     return (
-        <div className="absolute left-0 top-0 -z-50  h-screen w-screen">
+        <div className="absolute left-0 top-0 -z-50 h-screen  w-screen bg-[#0a0c37]">
             <video {...VideoProps} ref={ref} poster="/fv.webp" loop>
                 <source src="/fv_movie2.webm" type="video/webm" />
             </video>
             <video
                 {...VideoProps}
                 // 视频加载完毕
-                onCanPlay={(e) => {
-                    e.currentTarget.currentTime = 1;
-                }}
+
                 autoPlay
                 onEnded={(e) => {
                     // 播放完毕隐藏
